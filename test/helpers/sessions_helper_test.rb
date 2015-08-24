@@ -1,3 +1,5 @@
+# Because in test/test_helper.rb, log_in_as method uses session[:user_id] = user.id,
+# we can test the current_user method by creating a Sessions helper test
 require 'test_helper'
 
 class SessionsHelperTest < ActionView::TestCase
