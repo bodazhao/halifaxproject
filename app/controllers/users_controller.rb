@@ -40,6 +40,18 @@ class UsersController < ApplicationController
     end
   end
   
+  def setmod
+    if logged_in? && current_user.admin?
+      @user = User.find(params[:id])
+      @user.update_attribute(:mod, true) 
+      flash[:success] = "User ID #{@user.id} is now a mod!"
+      redirect_to users_url
+    else
+      flash[:warning] = "You can't do that!"
+      redirect_to users_url
+    end
+  end
+  
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
