@@ -18,9 +18,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end
@@ -42,9 +42,21 @@ class UsersController < ApplicationController
   
   def setmod
     if logged_in? && current_user.admin?
-      @user = User.find(params[:id])
+      @user = User.find_by_id(params[:id])
       @user.update_attribute(:mod, true) 
       flash[:success] = "User ID #{@user.id} is now a mod!"
+      redirect_to users_url
+    else
+      flash[:warning] = "You can't do that!"
+      redirect_to users_url
+    end
+  end
+  
+  def removemod
+    if logged_in? && current_user.admin?
+      @user = User.find_by_id(params[:id])
+      @user.update_attribute(:mod, false) 
+      flash[:success] = "User ID #{@user.id} no longer a mod!"
       redirect_to users_url
     else
       flash[:warning] = "You can't do that!"

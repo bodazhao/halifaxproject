@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   
   get 'signup' => 'users#new'
   get 'setmod' => 'users#setmod'
+  get 'removemod' => 'users#removemod'
   
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   
   resources :users
+  resources :account_activations, only: [:edit]
 end
