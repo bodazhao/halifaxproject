@@ -12,14 +12,15 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'input[type=file]'
     # Invalid submission
     assert_no_difference 'Micropost.count' do
-      post microposts_path, micropost: { content: "" }
+      post microposts_path, micropost: { title: "", content: "" }
     end
     assert_select 'div#error_explanation'
     # Valid submission
+    title = "Test event title"
     content = "This micropost really ties the room together"
     picture = fixture_file_upload('test/fixtures/rails.png', 'image/png')
     assert_difference 'Micropost.count', 1 do
-      post microposts_path, micropost: { content: content, picture: picture }
+      post microposts_path, micropost: { title: title, content: content, picture: picture }
     end
     assert assigns(:micropost).picture?
     assert_redirected_to root_url
@@ -46,7 +47,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     get root_path
     assert_match "0 microposts", response.body
     # Create a micropost
-    other_user.microposts.create!(content: "A micropost")
+    other_user.microposts.create!(title: "title", content: "A micropost")
     get root_path
     assert_match "1 micropost", response.body
   end

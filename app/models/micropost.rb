@@ -2,7 +2,9 @@ class Micropost < ActiveRecord::Base
   belongs_to :user
   default_scope -> { order(created_at: :desc) } # Proc(procedure) or lambda syntax
   mount_uploader :picture, PictureUploader
+  
   validates :user_id, presence: true
+  validates :title,   presence: true
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
   
