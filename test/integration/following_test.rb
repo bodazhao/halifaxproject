@@ -7,6 +7,13 @@ class FollowingTest < ActionDispatch::IntegrationTest
     @other = users(:archer)
     log_in_as(@user)
   end
+  
+  test "feed on Homepage" do
+    get root_path
+    @user.feed.paginate(page: 1).each do |micropost|
+      assert_match CGI.escapeHTML(micropost.content), response.body
+    end
+  end
 
   test "following page" do
     get following_user_path(@user)
