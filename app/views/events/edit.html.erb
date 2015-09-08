@@ -1,0 +1,15 @@
+<% provide(:title, "Edit Event") %>
+<h1>Update your event</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    
+    <%= simple_form_for(@event, html: { multipart: true }, :defaults => {:required => false}) do |f| %>
+    
+      <%= render 'fields', f: f %>
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+      
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div id="event-<%= event.id %>" class="panel panel-primary event-item">
+  <div class="panel-heading">
+    <div class="panel-title"><%= link_to event.title, event %> - <%= link_to event.user.name, event.user %></div>
+    <% date_start_display =  (event.date_start).strftime('%A,%e %B') %>
+    <strong>
+    <%= date_start_display %>
+    <%= event.time_start_hour %>:<%= event.time_start_minute %>
+
+    <% am_hours = [0,1,2,3,4,5,6,7,8,9,10,11] %>
+    <% if event.time_start_hour.in?(am_hours) %>
+      AM</strong>
+    <% else %>
+      PM</strong>
+    <% end %>
+    
+    <% if event.date_end > event.date_start %>
+      to
+      <% date_end_display =  (event.date_end).strftime('%A,%e %B') %>
+      <%= date_end_display %>
+      <%= event.time_end_hour %>:<%= event.time_end_minute %>
+    <% end %>
+    
+  </div>
+  <div class="panel-body event-content">
+    <% preview_content = truncate(event.content, length: 100) %>
+    <%= simple_format(preview_content) %>
+    
+    <div class="picture_preview">
+      <%= image_tag event.picture.url if event.picture? %>  
+    </div>
+    
+    <div>
+      Posted <%= time_ago_in_words(event.created_at) %> ago.
+      <% if current_user?(event.user) %>
+      <%= link_to "edit", edit_event_path(event) %>
+      |
+      <%= link_to "delete", event, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+      <% end %>
+    </div>
+    
+    
+    
+  </div>
+</div>
