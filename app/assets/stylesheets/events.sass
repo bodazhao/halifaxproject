@@ -1,5 +1,8 @@
 @import 'application'
 
+.container label
+  margin-right: 10px
+  
 /* events
 .events
   list-style: none
@@ -35,27 +38,34 @@ span.picture
     border: 0
     
 .event_time
+  display: flex
+  flex-flow: row wrap
   select
     border: 3px solid black
-    max-width: 60px
     padding: 5px
-    margin-left: 10px
-  select:nth-child(2)
-    max-width: 200px
+    margin-right: 10px
+
+.event_location
+  margin-top: 10px
+  display: flex
+  flex-flow: row wrap
+  align-items: center
+  select
+    border: 3px solid black
+    padding: 5px
+    max-width: 150px
+    
+.event_type
+  margin-top: 10px
+  select
+    max-width: 150px
+    border: 3px solid black
     
 #event_content
   min-height: 300px
     
 .change_endtime_css
   display: none
-  
-.event_location
-  select
-    border: 3px solid black
-    padding: 5px
-    max-width: 20%
-    min-width: 150px
-    border-radius: 3px
 
 =column-width($val)
   -webkit-column-width: $val
@@ -90,7 +100,7 @@ span.picture
     flex-flow: column wrap
     
 .flex-item
-  height: 250px
+  height: 265px
   width: 23%
   @media screen and (max-width: 770px) 
     width: 100%

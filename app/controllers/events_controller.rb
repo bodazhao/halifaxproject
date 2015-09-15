@@ -36,7 +36,7 @@ class EventsController < ApplicationController
     @courts = Court.all
     @houses = House.where("court_id = ?", Court.first.id)
     if @event.save
-      flash[:success] = "event created!"
+      flash[:success] = "Event Created!"
       redirect_to root_url
     else
       @feed_items = []

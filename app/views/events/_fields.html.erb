@@ -11,10 +11,15 @@
     <% dates_array = Date.current..1.month.from_now.to_date %>
     <% minutes_array = ['00','05','10','15','20','25','30','35','40','45','50','55'] %>
     
-    <%= f.input :date_start, label: 'Event Date', collection: dates_array %>
-    
-    <%= f.input :time_start_hour, label: 'Time', collection: 0..23 %>
-    <%= f.input :time_start_minute, label: ':', collection: minutes_array %>
+    <div class="event_start_date">
+      <%= f.input :date_start, label: 'Event Date', collection: dates_array %>
+    </div>
+    <div class="event_start_hour">
+      <%= f.input :time_start_hour, label: 'Time', collection: 0..23 %>
+    </div>
+    <div class="event_start_minute">
+      <%= f.input :time_start_minute, label: ':', collection: minutes_array %>
+    </div>
     <a class="show_endtime">add end date?</a>
   </div>
   
@@ -23,12 +28,14 @@
     <%= f.input :time_end_hour, label: 'Time', collection: 0..23 %>
     <%= f.input :time_end_minute, label: ':', collection: minutes_array %>
   </div>
-  <br>
   
   <div class="event_location">
     <%= f.label 'Event Location' %>
     <%= f.select :court_id, options_for_select(@courts.collect { |court| [court.name, court.id] }, 1), {}, { id: 'courts_select' } %>
     <%= f.select :house_id, options_for_select(@houses.collect { |house| [house.name, house.id] }, 0), {}, { id: 'houses_select' } %>
+  </div>
+  
+  <div class="event_type">
     <%= f.label 'Event Type' %>
     <%= f.select :category_id, options_for_select(@categories.collect { |category| [category.name, category.id] }, 1) %>
   </div>
@@ -39,7 +46,7 @@
   </div>
   
   <span class="picture">
-    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+    <% f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
   </span>
   
   <br>

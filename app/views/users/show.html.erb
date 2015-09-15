@@ -1,16 +1,13 @@
 <% provide(:title, @user.name) %>
 
-<div class="row" style="margin-left: 350px;">
+<div class="user-info">
   <%= gravatar_for @user %>
+  <div class="user-name">
+    <%= @user.name %>  
+  </div>
 </div>
 
-<div class="row" style="text-align: center;">
-  <%= @user.name %>
-</div>
-
-<div class="row" style="margin-left: 350px;">
-  <%= render 'shared/stats' %>
-</div>
+<% render 'shared/stats' %>
 
 <div class="col-md-12">
   
