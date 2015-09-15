@@ -16,3 +16,21 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  return $(document).on('change', '#courts_select', function(evt) {
+    return $.ajax('/events/update_houses', {
+      type: 'GET',
+      dataType: 'script',
+      data: {
+        court_id: $("#courts_select option:selected").val()
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        return console.log("AJAX Error: " + textStatus);
+      },
+      success: function(data, textStatus, jqXHR) {
+        return console.log("Dynamic court select OK!");
+      }
+    });
+  });
+});

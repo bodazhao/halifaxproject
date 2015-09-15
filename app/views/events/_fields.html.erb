@@ -18,10 +18,19 @@
     <a class="show_endtime">add end date?</a>
   </div>
   
-  <div class="form-inline event_time change_endtime_css" id="">
+  <div class="form-inline event_time change_endtime_css">
     <%= f.input :date_end, label: 'Event End Date', collection: dates_array %>
     <%= f.input :time_end_hour, label: 'Time', collection: 0..23 %>
     <%= f.input :time_end_minute, label: ':', collection: minutes_array %>
+  </div>
+  <br>
+  
+  <div class="event_location">
+    <%= f.label 'Event Location' %>
+    <%= f.select :court_id, options_for_select(@courts.collect { |court| [court.name, court.id] }, 1), {}, { id: 'courts_select' } %>
+    <%= f.select :house_id, options_for_select(@houses.collect { |house| [house.name, house.id] }, 0), {}, { id: 'houses_select' } %>
+    <%= f.label 'Event Type' %>
+    <%= f.select :category_id, options_for_select(@categories.collect { |category| [category.name, category.id] }, 1) %>
   </div>
   
   <div class="field">

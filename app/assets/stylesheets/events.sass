@@ -41,23 +41,71 @@ span.picture
     padding: 5px
     margin-left: 10px
   select:nth-child(2)
-    max-width: 250px
+    max-width: 200px
+    
+#event_content
+  min-height: 300px
     
 .change_endtime_css
   display: none
   
+.event_location
+  select
+    border: 3px solid black
+    padding: 5px
+    max-width: 20%
+    min-width: 150px
+    border-radius: 3px
+
+=column-width($val)
+  -webkit-column-width: $val
+  -moz-column-width:    $val
+  -ms-column-width:     $val
+  column-width:         $val
+
+=column-gap($val)
+  -webkit-column-gap: $val
+  -moz-column-gap:    $val
+  -ms-column-gap:     $val
+  column-gap:         $val
+  
+=column-count($val)
+  -webkit-column-count: $val
+  -moz-column-count:    $val
+  -ms-column-count:     $val
+  column-count:         $val
+  
 .event-row 
-  -moz-column-width: 18em
-  -webkit-column-width: 18em
-  -moz-column-gap: 1em
-  -webkit-column-gap: 1em
+  // @include column-width(19em)
+  // @include column-gap(1em)
+  // @include column-count(3)
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-flow: row wrap
+  justify-content: space-around
+  @media screen and (max-width: 770px) 
+    flex-flow: column wrap
+    
+.flex-item
+  height: 250px
+  width: 23%
+  @media screen and (max-width: 770px) 
+    width: 100%
 
 .event-item
+  display: inline-block
+  // width:  100%
+  
+.event-show-item
   display: inline-block
   width:  100%
   
 .event-content
   word-wrap: break-word
+  height: 100%
 
 .picture_preview
   img

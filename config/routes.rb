@@ -13,6 +13,8 @@ root                  'static_pages#home'
   post 'login' =>     'sessions#create'
   delete 'logout' =>  'sessions#destroy'
   
+  get 'events/update_houses', as: 'update_houses'
+  
   resources :users do
     member do 
       get :following, :followers
@@ -20,6 +22,6 @@ root                  'static_pages#home'
   end
   resources :account_activations,   only: [:edit]
   resources :password_resets,       only: [:new, :create, :edit, :update]
-  resources :events,                only: [:new, :show, :edit, :update, :create, :destroy]
+  resources :events,                only: [:new, :index, :show, :edit, :update, :create, :destroy]
   resources :relationships,         only: [:create, :destroy]
 end

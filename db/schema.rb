@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905135637) do
+ActiveRecord::Schema.define(version: 20150912164724) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "courts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -26,10 +38,22 @@ ActiveRecord::Schema.define(version: 20150905135637) do
     t.string   "picture"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "court_id"
+    t.integer  "house_id"
+    t.integer  "category_id"
   end
 
   add_index "events", ["user_id", "created_at"], name: "index_events_on_user_id_and_created_at"
   add_index "events", ["user_id"], name: "index_events_on_user_id"
+
+  create_table "houses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "court_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "houses", ["court_id"], name: "index_houses_on_court_id"
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"

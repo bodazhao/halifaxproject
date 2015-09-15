@@ -1,6 +1,8 @@
-<div id="event-<%= @event.id %>" class="panel panel-primary event-item">
+<div id="event-<%= @event.id %>" class="panel <%= @event.update_panel %> event-show-item">
   <div class="panel-heading">
-    <div class="panel-title"><%= @event.title %> - <%= link_to @event.user.name, @event.user %></div>
+    <div class="panel-title">
+      <strong><%= @event.title %></strong> - <%= link_to @event.user.name, @event.user %>
+    </div>
     <% date_start_display =  (@event.date_start).strftime('%A,%e %B') %>
     <strong>
     <%= date_start_display %>
@@ -19,6 +21,10 @@
       <%= date_end_display %>
       <%= @event.time_end_hour %>:<%= @event.time_end_minute %>
     <% end %>
+    
+    <div style="border-left: 3px solid black; padding-left: 5px;">
+      <%= House.find(@event.house_id).name %> - <%= @event.category.name %>
+    </div>
     
   </div>
   <div class="panel-body event-content">

@@ -1,0 +1,8 @@
+<h1><%= params[:court] %> Events</h1>
+
+<div class="event-row">
+  <% @events.each do |event| %>
+    <%= render 'event', :event => event %>
+  <% end%>
+</div>
+

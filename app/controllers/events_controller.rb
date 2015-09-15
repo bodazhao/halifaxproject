@@ -3,7 +3,28 @@ class EventsController < ApplicationController
   before_action :correct_user,    only: [:edit, :update, :destroy]
   
   def new
-    @event = Event.new
+    @event  = Event.new
+    @courts = Court.all
+    @categories = Category.all
+    @houses = House.all
+  end
+  
+  def update_houses
+    @houses = House.where("court_id = ?", params[:court_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def index
+    if params[:court].blank?
+      @events = Event.all.order("created_at DESC")
+    else
+      @court_id = Court.find_by(name: params[:court]).id
+      @events = Event.where(court_id: @court_id).order("created_at DESC").paginate(
+          page: params[:page],
+          :per_page => 20)
+    end
   end
   
   def show
@@ -12,6 +33,8 @@ class EventsController < ApplicationController
   
   def create
     @event = current_user.events.build(event_params)
+    @courts = Court.all
+    @houses = House.where("court_id = ?", Court.first.id)
     if @event.save
       flash[:success] = "event created!"
       redirect_to root_url
@@ -23,6 +46,9 @@ class EventsController < ApplicationController
   
   def edit
     @event = Event.find(params[:id])
+    @courts = Court.all
+    @categories = Category.all
+    @houses = House.all
   end
   
   def update
@@ -47,6 +73,7 @@ class EventsController < ApplicationController
       params.require(:event).permit(:title, :date_start, :date_end, 
                                     :time_start_hour, :time_start_minute, 
                                     :time_end_hour, :time_end_minute, 
+                                    :court_id, :house_id, :category_id,
                                     :content, :picture)
     end
     

@@ -1,0 +1,13 @@
+<%= simple_form_for(@event, :defaults => {:required => false}) do |f| %>
+
+  <div class="event_location">
+    <%= f.select :court_id, options_for_select(@courts.collect { |court| [court.name, court.id] }, 1), {}, { id: 'courts_select' } %>
+    <%= f.select :house_id, options_for_select(@houses.collect { |house| [house.name, house.id] }, 0), {}, { id: 'houses_select' } %>
+  </div>
+  
+<% end %>
+
+<script type="text/javascript">
+
+
+</script>

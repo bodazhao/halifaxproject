@@ -1,16 +1,33 @@
 class Event < ActiveRecord::Base
+  belongs_to :court
+  belongs_to :category
   belongs_to :user
   #default_scope -> { where('date_start >= ?', Date.current ).order(date_start: :asc) } # Proc(procedure) or lambda syntax
   mount_uploader :picture, PictureUploader
-  
-  # attr_accessor :date_start_display
+
   before_save  :default_date_end
   
-  validates :user_id, presence: true
-  validates :title,   presence: true, length: { maximum: 140 }
+  validates :user_id,                                           presence: true
+  validates :title,                                             presence: true, length: { maximum: 140 }
   validates :date_start, :time_start_hour, :time_start_minute,  presence: true
-  validates :content, presence: true, length: { maximum: 1400 }
+  validates :court_id, :house_id, :category_id,                 presence: true
+  validates :content,                                           presence: true, length: { maximum: 1400 }
   validate  :picture_size
+  
+  def update_panel
+    case self.category.name
+    when 'College'
+      'panel-primary'
+    when 'Social'
+      'panel-info'
+    when 'Sports'
+      'panel-success'
+    when 'Study'
+    'panel-warning'
+    else
+      'panel-default'
+    end
+  end
   
   private
     def picture_size

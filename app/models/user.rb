@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   
   validates :name, presence: true, length: {maximum: 50}
   
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255}, 
                                     format: { with: VALID_EMAIL_REGEX }, 
@@ -79,8 +80,7 @@ class User < ActiveRecord::Base
     #                 WHERE  follower_id = :user_id"
     # Event.where("user_id IN (#{following_ids})
     #                 OR user_id = :user_id", user_id: id)
-    
-    Event.where("date_start >= ?", Date.current).order(date_start: :asc)
+    Event.where("date_end >= ?", Date.current).order(date_start: :asc)
   end
   
   def follow(other_user)

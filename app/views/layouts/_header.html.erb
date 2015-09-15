@@ -37,3 +37,13 @@
     </div>
   </div>
 </nav>
+
+<% if logged_in? %>
+  <div class="container nav-court-list">
+    <% Court.all.each do |court| %>
+      <%= link_to court.name, events_path(court: court.name) %>
+    <% end %>
+  </div>
+<% end %>
+
+
