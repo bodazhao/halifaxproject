@@ -21,7 +21,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @yorkemaildomain = @user.email.split('@')[1]
-    if @yorkemaildomain != 'york.ac.uk'
+    
+    banned_emails = []
+    
+    if banned_emails.include?(@user.email)
+      flash[:danger] = "You account has been banned, please contact admin"
+      render 'new'
+    elsif @yorkemaildomain != 'york.ac.uk'
       flash[:danger] = "Please use University of York email"
       render 'new'
     elsif @user.save
