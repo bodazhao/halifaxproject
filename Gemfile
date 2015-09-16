@@ -20,7 +20,7 @@ gem 'mini_magick',                  '4.3.1'
 gem 'fog',                          '1.34.0'
 gem 'simple_form',                  '3.1.1'
 gem 'jquery-ui-rails',              '5.0.5'
-gem 'has_scope',                    '0.6.0'
+gem 'bootswatch-rails',             '3.3.5'
 
 group :development, :test do
   gem 'sqlite3',          '1.3.10'
