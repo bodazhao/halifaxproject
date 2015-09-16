@@ -1,4 +1,5 @@
 <% provide(:title, 'Signup') %>
+
 <h1>Sign up</h1>
 
 <div class="row">
@@ -6,6 +7,7 @@
     
     <%= form_for(@user) do |f| %>
       <%= render 'fields', f: f %> <!-- first f is the fs in the _user partials -->
+      <br>
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
     
