@@ -31,13 +31,13 @@
   
   <div class="event_location">
     <%= f.label 'Event Location' %>
-    <%= f.select :court_id, options_for_select(@courts.collect { |court| [court.name, court.id] }, 1), {}, { id: 'courts_select' } %>
-    <%= f.select :house_id, options_for_select(@houses.collect { |house| [house.name, house.id] }, 0), {}, { id: 'houses_select' } %>
+    <%= f.select :court_id, options_for_select(@courts.collect { |court| [court.name, court.id] }, @event.court_id), {}, { id: 'courts_select' } %>
+    <%= f.select :house_id, options_for_select(@houses.collect { |house| [house.name, house.id] }, @event.house_id), {}, { id: 'houses_select' } %>
   </div>
   
   <div class="event_type">
     <%= f.label 'Event Type' %>
-    <%= f.select :category_id, options_for_select(@categories.collect { |category| [category.name, category.id] }, 1) %>
+    <%= f.select :category_id, options_for_select(@categories.collect { |category| [category.name, category.id] }, @event.category_id ) %>
   </div>
   
   <div class="field">

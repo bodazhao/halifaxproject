@@ -47,8 +47,8 @@ class EventsController < ApplicationController
   def edit
     @event = Event.find(params[:id])
     @courts = Court.all
+    @houses = House.where(:court_id => @event.court_id)
     @categories = Category.all
-    @houses = House.all
   end
   
   def update
