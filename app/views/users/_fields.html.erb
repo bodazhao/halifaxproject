@@ -3,11 +3,11 @@
 <%= f.label :name %>
 <%= f.text_field :name, class: 'form-control' %>
 
-<%= f.label :email, "Email: (use your University of York Email)" %>
+<%= f.label :email, "Email (use your University of York Email)" %>
 <%= f.email_field :email, class: 'form-control' %>
 
-<%= f.label :password %>
+<%= f.label :password, "Password (recommend to use a different password to your uni account)" %>
 <%= f.password_field :password, class: 'form-control' %>
 
-<%= f.label :password_confirmation, "Confirmation" %>
+<%= f.label :password_confirmation, "Password Confirmation" %>
 <%= f.password_field :password_confirmation, class: 'form-control' %>
